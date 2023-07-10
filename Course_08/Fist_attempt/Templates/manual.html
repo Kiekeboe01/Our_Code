@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="manual">
+        <!--The script for the button-->
+        <script src="../static/Javascript/Button_manual.js"></script>
+        <!--The tool manual section-->
+        <div class="tool-manual">
+            <button class="LoadText" onclick="toggleText('manual', 'material')">Tool manual <span
+                    id="materialArrow">&darr;</span></button>
+            <div class="LoadElement" id="manual">
+                <h1>Home</h1>
+                <p>Our motivation for the research can be found on the home page.</p>
+                <h1><b>Results</b></h1>
+                <p>There is a drop-down menu in the results. By clicking on it, you will see different values. Results
+                    are visible under each value.</p>
+                <h2><b>Table</b></h2>
+                <p>The table shows the pubmedID, date, author, title, keyword and link to the article. The header below
+                    contains a row containing the word <i>Search…</i>. You can click on it and enter text to search the
+                    corresponding column.</p>
+                <p> To reset the table, delete the word you typed in or reset the page.</p>
+                <h2>Chart</h2>
+                <p>Three different charts are visible. Each chart has an explanation of the chart on the left side.</p>
+                <h1>Manual</h1>
+                <p>The manual contains the tool manual, the method of the research, the keywords used and the sources.
+                    If you click on one of the buttons, the corresponding text will become visible.</p>
+                <h1>About Us</h1>
+                <p>The purpose of the research can be found in the about us.</p>
+            </div>
+        </div>
+
+        <!--The method section-->
+        <div class="method">
+            <button class="LoadText" onclick="toggleText('method', 'method')">Method <span
+                    id="methodArrow">&darr;</span>
+            </button>
+            <div class="LoadElement" id="method">
+                <!--Textmining part-->
+                <h2>Textmining</h2>
+                <p>The first part of this process involves retrieving relevant keywords for co-occurrence. This is done
+                    by opening a text file and extracting the keywords needed for further analysis.
+                <p>After getting the keywords, we move on to the next stage, where we open a database and extract the
+                    abstracts. These abstracts likely contain important information that we want to analyze.</p>
+                <p>To further refine the data, in step 3 we will work with a for loop to remove stem words and stop
+                    words per abstract. This eliminates words that add little value to the analysis, such as common
+                    words or words with no specific meaning. We also remove special characters to keep the data clean
+                    and structured.</p>
+                <p>Then it is time for step 4, where we will find the relevant keywords in the abstracts. This can be
+                    done, for example, by using advanced search algorithms or by comparing the words in the abstracts
+                    with the retrieved keywords.</p>
+                <p>Now that we have identified the necessary keywords, we can move on to step 5, where we perform
+                    co-occurrence analysis. We construct a co-occurrence matrix using the keywords found. This matrix
+                    indicates how often the keywords appear together in the abstracts and helps identify patterns and
+                    relationships between the words.</p>
+                <p>In step 6, we add the co-occurrence matrix to a larger master_matrix. This allows us to combine the
+                    results of different analyzes and get a more comprehensive picture of the relationships between the
+                    keywords.</p>
+                <p>To store the results, let's move on to step 7, placing the master_array in a JSON file. Using JSON
+                    (JavaScript Object Notation) makes it easy to store and share structured data.</p>
+                <p>Finally, in step 8, we read out the JSON file and store the interesting results in a table. This
+                    allows us to present key findings and make them easily accessible for further analysis or
+                    reporting.</p>
+                <p>This process provides a structured method to extract keywords, analyze co-occurrence, and store key
+                    findings for further processing and interpretation. It can be useful in exploring large amounts of
+                    textual data and discovering hidden connections between words and concepts.</p>
+
+                <!--Database part-->
+                <h2>Database</h2>
+                <p>The database functionality of the Bioinformatics Tool allows you to store article information, such
+                    as titles, abstracts, authors, and publication dates. You can also link articles to keywords for
+                    better organization and retrieval.</p>
+                <h3><i>The database headers with the description contained in them.</i></h3>
+                <!--The headers in the database with the description-->
+                <table class="table-manual">
+                    <thead>
+                    <tr class="table-header" bgcolor="#357A76" align="center">
+                        <th>Headers</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Articles</td>
+                        <td>Unique identifier for each article.</td>
+                    </tr>
+                    <tr>
+                        <td>article_ID</td>
+                        <td>Unique identifier for each article.</td>
+                    </tr>
+                    <tr>
+                        <td>title</td>
+                        <td>Title of the article.</td>
+                    </tr>
+                    <tr>
+                        <td>abstract</td>
+                        <td>Abstract of the article.</td>
+                    </tr>
+                    <tr>
+                        <td>links</td>
+                        <td>Link to the article on PubMed.</td>
+                    </tr>
+                    <tr>
+                        <td>pubmed_id</td>
+                        <td>PubMed ID of the article.</td>
+                    </tr>
+                    <tr>
+                        <td>authors</td>
+                        <td>Authors of the article.</td>
+                    </tr>
+                    <tr>
+                        <td>dates</td>
+                        <td>Publication date of the article.</td>
+                    </tr>
+                    <tr>
+                        <td>Articles_Keywords</td>
+                        <td>Maps articles to keywords using a many-to-many relationship.</td>
+                    </tr>
+                    <tr>
+                        <td>Articles_article_ID</td>
+                        <td>Foreign key referencing the article_ID column in the Articles table.</td>
+                    </tr>
+                    <tr>
+                        <td>Keywords_keyword_ID</td>
+                        <td>Foreign key referencing the keyword_ID column in the Keywords table.</td>
+                    </tr>
+                    <tr>
+                        <td>Keywords</td>
+                        <td>Stores unique keywords.</td>
+                    </tr>
+                    <tr>
+                        <td>keyword_ID</td>
+                        <td>Unique identifier for each keyword.</td>
+                    </tr>
+                    <tr>
+                        <td>keyword</td>
+                        <td>Keyword associated with articles.</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!--Website part-->
+                <h2>Website</h2>
+                <p>The website visualizes the results from the text mining and the database. For the connection between
+                    the database and the website Flask is used. Flask ensures that the
+                    design and the code behind it are nicely connected.</p>
+            </div>
+        </div>
+
+        <!--The keywords section-->
+        <div class="Keywords">
+            <button class="LoadText" onclick="toggleText('keyword', 'keywords')">Keywords <span
+                    id="keywordsArrow">&darr;</span></button>
+            <div class="LoadElement" id="keyword">
+                <h1>Keywords</h1>
+                <p>The following keywords are used in this research. The keywords are used to gather the articles that
+                    are used for textmining</p>
+                <!--The keywords used in textmining-->
+                <table class="table-manual">
+                    <thead>
+                    <tr class="table-header" bgcolor="#357A76" align="center">
+                        <th> Main keywords</th>
+                        <th> Combi keywords</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>BMP4</td>
+                        <td>DZ twinning</td>
+                    </tr>
+                    <tr>
+                        <td>bone morphogenetic protein 4</td>
+                        <td>Multiple ovulation</td>
+                    </tr>
+                    <tr>
+                        <td>WFIKKN1</td>
+                        <td>Multiple birth</td>
+                    </tr>
+                    <tr>
+                        <td>WAP, follistatin/kazal, immunoglobulin, kunitz and netrin domain containing 1</td>
+                        <td>Multiple pregnancy</td>
+                    </tr>
+                    <tr>
+                        <td>GNRH1</td>
+                        <td>Dizygotic</td>
+                    </tr>
+                    <tr>
+                        <td>gonadotropin releasing hormone 1</td>
+                        <td>Fetus</td>
+                    </tr>
+                    <tr>
+                        <td>FSHR</td>
+                        <td>Twinning</td>
+                    </tr>
+                    <tr>
+                        <td>follicle stimulating hormone receptor</td>
+                        <td>Fertility cycle</td>
+                    </tr>
+                    <tr>
+                        <td>ZFPM1</td>
+                        <td>Twins</td>
+                    </tr>
+                    <tr>
+                        <td>zinc finger protein, FOG family member 1</td>
+                        <td>Sheep</td>
+                    </tr>
+                    <tr>
+                        <td>IPO8</td>
+                        <td>Multiple Ovarian folliculogenesis</td>
+                    </tr>
+                    <tr>
+                        <td>importin 8</td>
+                    </tr>
+                    <tr>
+                        <td>SMAD3</td>
+                    </tr>
+                    <tr>
+                        <td>SMAD family member 3</td>
+                    </tr>
+                    <tr>
+                        <td>ARL14EP</td>
+                    </tr>
+                    <tr>
+                        <td>ADP ribosylation factor like GTPase 14 effector protein</td>
+                    </tr>
+                    <tr>
+                        <td>FSHB</td>
+                    </tr>
+                    <tr>
+                        <td>follicle stimulating hormone subunit beta</td>
+                    </tr>
+                    <tr>
+                        <td>PCOS</td>
+                    </tr>
+                    <tr>
+                        <td>polycystic ovary syndrome 1</td>
+                    </tr>
+                    <tr>
+                        <td>DOCK5</td>
+                    </tr>
+                    <tr>
+                        <td>dedicator of cytokinesis 5</td>
+                    </tr>
+                    <tr>
+                        <td>CAPRIN2</td>
+                    </tr>
+                    <tr>
+                        <td>caprin family member 2</td>
+                    </tr>
+                    <tr>
+                        <td>BMPRIB</td>
+                    </tr>
+                    <tr>
+                        <td>GDF9</td>
+                    </tr>
+                    <tr>
+                        <td>growth differentiation factor 9</td>
+                    </tr>
+                    <tr>
+                        <td>BMP15</td>
+                    </tr>
+                    <tr>
+                        <td>bone morphogenetic protein 15</td>
+                    </tr>
+                    <tr>
+                        <td>ADAMTS1</td>
+                    </tr>
+                    <tr>
+                        <td>ADAM metallopeptidase with thrombospondin type 1 motif 1</td>
+                    </tr>
+                    <tr>
+                        <td>HAS2</td>
+                    </tr>
+                    <tr>
+                        <td>hyaluronan synthase 2</td>
+                    </tr>
+                    <tr>
+                        <td>CD24</td>
+                    </tr>
+                    <tr>
+                        <td>CD24 molecule</td>
+                    </tr>
+                    <tr>
+                        <td>ANKRD22</td>
+                    </tr>
+                    <tr>
+                        <td>ankyrin repeat domain 22</td>
+                    </tr>
+                    <tr>
+                        <td>CLDN11</td>
+                    </tr>
+                    <tr>
+                        <td>claudin 11</td>
+                    </tr>
+                    <tr>
+                        <td>FBXO32</td>
+                    </tr>
+                    <tr>
+                        <td>F-box protein 32</td>
+                    </tr>
+                    <tr>
+                        <td>CYP17A</td>
+                    </tr>
+                    <tr>
+                        <td>cytochrome P450 family 17 subfamily A member 1</td>
+                    </tr>
+                    <tr>
+                        <td>CYP19A</td>
+                    </tr>
+                    <tr>
+                        <td>cytochrome P450 family 19 subfamily A member 1</td>
+                    </tr>
+                    <tr>
+                        <td>HSD11B1</td>
+                    </tr>
+                    <tr>
+                        <td>hydroxysteroid 11-beta dehydrogenase 1</td>
+                    </tr>
+                    <tr>
+                        <td>HSD11B2</td>
+                    </tr>
+                    <tr>
+                        <td>hydroxysteroid 11-beta dehydrogenase 2</td>
+                    </tr>
+                    <tr>
+                        <td>StAR</td>
+                    </tr>
+                    <tr>
+                        <td>steroidogenic acute regulatory protein</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--The sources section-->
+        <div class="sources">
+            <button class="LoadText" onclick="toggleText('source', 'source')">Sources <span
+                    id="sourceArrow">&darr;</span>
+            </button>
+            <div class="LoadElement" id="source">
+                <h1>Sources</h1>
+                <p>This are the sources that we used in our project</p>
+                <!--All the sources used in project-->
+                <table class="table-manual">
+                    <tr class="table-header" bgcolor="#357A76" align="center">
+                        <th>Techniques</th>
+                        <th>Source</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Bio.Entrez package</td>
+                        <td>Biopython 1.76 documentation. (z.d.). https://biopython.org/docs/1.76/api/Bio.Entrez.html
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Collections</td>
+                        <td>Container datatypes. (z.d.). Python documentation.
+                            https://docs.python.org/3/library/collections.html
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Home</td>
+                        <td>HUGO Gene Nomenclature Committee. (z.d.). https://www.genenames.org/</td>
+                    </tr>
+                    <tr>
+                        <td>json</td>
+                        <td>JSON encoder and decoder. (z.d.). Python documentation.
+                            https://docs.python.org/3/library/json.html
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>NLTK</td>
+                        <td>Natural Language Toolkit. (z.d.). https://www.nltk.org/</td>
+                    </tr>
+                    <tr>
+                        <td>FLASK</td>
+                        <td>Pallets Projects. (2021). Flask. Retrieved from https://flask.palletsprojects.com/</td>
+                    </tr>
+                    <tr>
+                        <td>re</td>
+                        <td>Regular expression operations. (z.d.). Python documentation.
+                            https://docs.python.org/3/library/re.html
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>jQuery</td>
+                        <td>The jQuery Foundation. (2020). jQuery. https://jquery.com/</td>
+                    </tr>
+                    <tr>
+                        <td>sqlite3</td>
+                        <td>DB-API 2.0 interface for SQLite databases. (z.d.). Python documentation.
+                            https://docs.python.org/3/library/sqlite3.html
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>time</td>
+                        <td>Time access and conversions. (z.d.). Python documentation.
+                            https://docs.python.org/3/library/time.html
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

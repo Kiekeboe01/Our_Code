@@ -1,0 +1,34 @@
+<!-- Gebruikt alles van de index html bijv. de navigatiebar-->
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="about-us">
+        <!-- First container in about us-->
+        <div class="First-About-us-Section">
+            <div class="First-Text-Container">
+                <h1>About us</h1>
+                <p class="First-Text-block-Subtext">We are bioinformatics students from the Netherlands. <br>
+                    We strive for more clarity about twinning and its relationship with the fertility
+                    cycle.</p>
+            </div>
+            <div class="First-Image-Container">
+                <!--Image on the first gray area-->
+                <img src="../static/Images/about-us-DNA.png" alt="logo">
+            </div>
+        </div>
+        <!-- Second container in about us-->
+        <div class="Second-About-us-Section">
+            <div class="Second-Image-Container">
+                <!--Image on the second gray area-->
+                <img src="../static/Images/about-us-laptop.png" alt="logo">
+            </div>
+            <div class="Second-Text-Container">
+                <h1>Goal</h1>
+                <p class="Second-Text-block-Subtext">We are doing this research to find an answer to our research
+                    question.</p>
+                <p class="Second-Text-block-Subtext">The research question of the project is: <i> What are the
+                    similarities between human and sheep twinning based on fertility cycle?</i></p>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

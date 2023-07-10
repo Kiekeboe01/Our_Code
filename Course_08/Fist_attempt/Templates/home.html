@@ -1,0 +1,35 @@
+<!-- Gebruikt alles van de index html bijv. de navigatiebar-->
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="home">
+        <!--First container from home-->
+        <div class="First-Home-Section">
+            <div class="First-Text-Container">
+                <h1>Twinning research</h1>
+                <p class="First-Text-block-Subtext"> Discover groundbreaking scientific papers for twins research. </p>
+                <p class="First-Text-block-Subtext">You can find articles not only about twins but also about the
+                    fertility cycle
+                    and the relationship between them.</p>
+            </div>
+            <div class="First-Image-Container">
+                <img src="../static/Images/twin-sheep.jpg" alt="logo">
+            </div>
+        </div>
+        <!--Second container from home-->
+        <div class="Second-Home-Section">
+            <div class="Second-Image-Container">
+                <img src="../static/Images/twin-sheep1.png" alt="logo">
+            </div>
+            <div class="Second-Text-Container">
+                <h1>Motivation</h1>
+                <p class="Second-Text-block-Subtext"> The study of the difference between fraternal twins in humans and
+                    sheep is
+                    an interesting and relevant topic. It can lead to insights into the genetic and environmental
+                    factors
+                    that play a role in the development of individual differences, which in turn can contribute to the
+                    understanding of hereditary disorders and the development of treatments.</p>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="results">
+        <!--The scripts for the code-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../static/Javascript/table.js"></script>
+        <!--Dropdown menu-->
+        <div class="dropdown-container">
+            <!--The dropdown menu-->
+            <form class="dropdown-menu">
+                <label for="dropdown">Select an option:</label>
+                <select id="dropdown" name="dropdown">
+                    <option value="Table-database-content" selected="selected">Table</option>
+                    <option value="Charts">Charts</option>
+                </select>
+            </form>
+            <!--Table menu content-->
+            <div id="Table-database-content" align="center">
+                <div class="table-information">
+                    <h1>Table</h1>
+                    <h4>Here can you find parts of all the papers. The total papers are 109669.</h4>
+                    <h4>Within the table headers, you have the option to put a search term that enables
+                        column-specific searching in the <em>Search...</em>. To get the whole table you need to get the
+                        search term out of the <em>Search...</em> or refresh the page.</h4>
+                </div>
+                <!--The table-->
+                <div class="table-body">
+                    <table class="table-results">
+                        <thead>
+                        <tr class="table-header-result" bgcolor="#357A76" align="center">
+                            <td> PubmedID</td>
+                            <td> Datum</td>
+                            <td> Auteur</td>
+                            <td> Titel</td>
+                            <td> Keyword</td>
+                            <td> Link</td>
+                        </tr>
+                        <!--The input row of the table-->
+                        <tr bgcolor="#49AAA4" align="center">
+                            <th>
+                                <input type="text" class="search-input" placeholder="Search..."
+                                       style="font-style: italic;">
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="Search..."
+                                       style="font-style: italic;">
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="Search..."
+                                       style="font-style: italic;">
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="Search..."
+                                       style="font-style: italic;">
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="Search..."
+                                       style="font-style: italic;">
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="Search..."
+                                       style="font-style: italic;">
+                            </th>
+                        </tr>
+                        </thead>
+                        <!--The rows with data from the database-->
+                        <tbody>
+                        {% for i in range(0, dates|length) %}
+                            <tr bgcolor="white" align="center">
+                                <td>{{ pubmedID[i] }}</td>
+                                <td>{{ dates[i] }}</td>
+                                <td>{{ authors[i] }}</td>
+                                <td>{{ titles[i] }}</td>
+                                <td>{{ keywords[i] }}</td>
+                                <td><a href="{{ links[i] }}">{{ links[i] }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--Chart menu content-->
+            <div id="Charts" class="charts">
+                <!--First chart-->
+                <div class="First-Chart-Section">
+                    <div class="First-Text-Container">
+                        <div class="image-text">
+                            <h1>Chart sheep hormones</h1>
+                            <p class="First-Text-block-Subtext">The pie chart shows the hormone percentage of the
+                                general
+                                fertility cycle of the sheep.
+                                These have been retrieved from the database. The percentage comes from the total number
+                                of articles found that contain one of these hormones and ovulation, fertility and sheep
+                                in the abstract. The total papers found were 36.</p>
+                        </div>
+                    </div>
+                    <div class="First-Image-Container">
+                        <img src="../static/Images/hormones-sheep.png" class="image"></div>
+                </div>
+                <!--Second chart-->
+                <div class="Second-Chart-Section">
+                    <div class="First-Text-Container">
+                        <div class="image-text">
+                            <h1>Chart human hormones</h1>
+                            <p class="First-Text-block-Subtext">The pie chart shows the hormone percentage of the
+                                general
+                                fertility cycle of humans.
+                                These have been retrieved from the database. The percentage comes from the total number
+                                of articles found that have one of these hormones in the abstract and ovulation,
+                                fertility and human. The total papers found were 372.</p>
+                        </div>
+                    </div>
+                    <div class="First-Image-Container">
+                        <img src="../static/Images/hormones-human.png" class="image"></div>
+                </div>
+                <!--Third chart-->
+                <div class="Third-Chart-Section">
+                    <div class="First-Text-Container">
+                        <div class="image-text">
+                            <h1>Bar plot</h1>
+                            <p class="First-Text-block-Subtext">The bar plot shows the number of connections between
+                                different terms. The number was
+                                extracted from the abstracts using text mining. For more information look at the method
+                                in the manual.</p>
+                        </div>
+                    </div>
+                    <div class="First-Image-Container">
+                        <img src="../static/Images/amount-of-connections-between-terms.png" class="image"></div>
+                </div>
+            </div>
+        </div>
+        <!--The script for the dropdown menu-->
+        <script src="../static/Javascript/dropdown.js"></script>
+    </section>
+
+{% endblock content %}
